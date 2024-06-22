@@ -19,33 +19,33 @@ ChartJS.register(
 );
 
 // Función para transformar datos para el gráfico Radar
-const transformDataForRadarChart = (workers) => {
+const transformDataForRadarChart = (worker) => {
   const labels = ['Adaptabilidad al cambio', 'Conducta segura', 'Dinamismo/Energía', 'Efectividad personal', 'Iniciativa', 'Trabajo bajo presión'];
-  const datasets = workers.map(worker => ({
-    label: worker.name,
-    data: [
-      worker.evaluations.adaptability_to_change,
-      worker.evaluations.safe_conduct,
-      worker.evaluations.dynamism_energy,
-      worker.evaluations.personal_effectiveness,
-      worker.evaluations.initiative,
-      worker.evaluations.working_under_pressure,
-    ],
-    backgroundColor: 'rgba(75,192,192,0.2)',
-    borderColor: 'rgba(75,192,192,1)',
-    borderWidth: 1,
-  }));
+  const data = [
+    worker.evaluations.adaptability_to_change,
+    worker.evaluations.safe_conduct,
+    worker.evaluations.dynamism_energy,
+    worker.evaluations.personal_effectiveness,
+    worker.evaluations.initiative,
+    worker.evaluations.working_under_pressure,
+  ];
 
   return {
     labels,
-    datasets,
+    datasets: [{
+      label: worker.name,
+      data,
+      backgroundColor: 'rgba(75,192,192,0.2)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderWidth: 1,
+    }],
   };
 };
 
-const RadarChart = ({ workers }) => {
+const RadarChart = ({ worker }) => {
   return (
     <Radar
-      data={transformDataForRadarChart(workers)}
+      data={transformDataForRadarChart(worker)}
       options={{
         scales: {
           r: { // En Chart.js 3.x, la escala radial se define como 'r'
@@ -55,7 +55,7 @@ const RadarChart = ({ workers }) => {
         plugins: {
           title: {
             display: true,
-            text: 'Evaluaciones de los Trabajadores',
+            text: 'Evaluaciones del Trabajador',
           },
         },
       }}

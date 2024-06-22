@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap CSS
+import RadarChart from '../Graphics/RadarChart';
 
 // Ejemplo de datos de empresas y trabajadores
 const companiesData = [
@@ -158,7 +159,7 @@ const WorkerAdministrationPage = () => {
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
-                                className="bg-light"
+                                className="bg-light mb-3 mt-3"
                             >
                                 <Typography>{company.name}</Typography>
                             </AccordionSummary>
@@ -183,28 +184,28 @@ const WorkerAdministrationPage = () => {
                                                             expandIcon={<ExpandMoreIcon />}
                                                             aria-controls="panel2a-content"
                                                             id="panel2a-header"
-                                                            className="bg-light"
+                                                            className="bg-light mb-3"
                                                         >
                                                             <Typography>{subcompany.name}</Typography>
                                                         </AccordionSummary>
                                                         <AccordionDetails style={{minWidth: '700px'}}>
                                                             <TableContainer>
                                                                 <Table>
-                                                                <TableHead>
-                                                                <TableRow>
-                                                                    <TableCell style={{fontWeight: 'bold'}}>Nombre</TableCell>
-                                                                    <TableCell style={{fontWeight: 'bold'}}>Área</TableCell>
-                                                                    <TableCell style={{fontWeight: 'bold'}}>Estado</TableCell>
-                                                                    <TableCell style={{fontWeight: 'bold'}}>Promedio Puntaje</TableCell>
-                                                                </TableRow>
-                                                                </TableHead>
+                                                                    <TableHead>
+                                                                        <TableRow>
+                                                                            <TableCell style={{fontWeight: 'bold'}}>Nombre</TableCell>
+                                                                            <TableCell style={{fontWeight: 'bold'}}>Área</TableCell>
+                                                                            <TableCell style={{fontWeight: 'bold'}}>Estado</TableCell>
+                                                                            <TableCell style={{fontWeight: 'bold'}}>Promedio Puntaje</TableCell>
+                                                                        </TableRow>
+                                                                    </TableHead>
                                                                     <TableBody style={{minWidth: '700px'}}>
                                                                         {subcompany.workers.map((worker) => (
                                                                             <TableRow
                                                                                 key={worker.id}
                                                                                 onClick={() => handleWorkerClick(worker)}
                                                                                 className={selectedWorker && selectedWorker.id === worker.id ? 'table-primary' : ''}
-                                                                                style={{ cursor: 'pointer' , width: '100%'}}
+                                                                                style={{ cursor: 'pointer', width: '100%' }}
                                                                             >
                                                                                 <TableCell>{worker.name}</TableCell>
                                                                                 <TableCell>{worker.area}</TableCell>
@@ -269,10 +270,10 @@ const WorkerAdministrationPage = () => {
                                                         <TableCell>{score}</TableCell>
                                                     </TableRow>
                                                 ))}
-                                                
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
+                                    <RadarChart worker={selectedWorker} />
                                 </React.Fragment>
                             )}
                         </DialogContent>
